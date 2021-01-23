@@ -52,7 +52,7 @@ export class SavantPlatform implements DynamicPlatformPlugin {
         this.api.updatePlatformAccessories([existingAccessory]);
       } else {
         const accessory = new this.api.platformAccessory(entity.name, uuid);
-        this.api.registerPlatformAccessories(PLUGIN_NAME, PLUGIN_NAME, [accessory]);
+        this.api.registerPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [accessory]);
         this.accessories.set(accessory.UUID, accessory);
       }
 
