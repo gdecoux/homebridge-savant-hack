@@ -20,8 +20,8 @@ export class SavantSwitch {
     private readonly entity: SavantEntity,
   ) {
     this.service =
-      this.accessory.getService(this.platform.Service.Lightbulb) ||
-      this.accessory.addService(this.platform.Service.Lightbulb);
+      this.accessory.getService(this.platform.Service.Switch) ||
+      this.accessory.addService(this.platform.Service.Switch);
 
     this.service
       .getCharacteristic(this.platform.Characteristic.On)
