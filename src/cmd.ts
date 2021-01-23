@@ -6,7 +6,26 @@ const DEFAULT_SOURCE_LOGICAL_COMPONENT = 'Lighting_controller';
 const DEFAULT_SERVICE_VARIANT = 1;
 const DEFAULT_SERVICE_TYPE = 'SVC_ENV_LIGHTING';
 
-export function getSwitchCmd({ addresses }: SavantEntity) {
+export function getSwitchCmd({ addresses }: SavantEntity, value: boolean) {
+  const args = addresses.split(',');
+  const addressArgs: string[] = [];
+
+  for (let i = 0; i < args.length; i++) {
+    addressArgs.push(...['Address' + (i + 1), args[i] || '']);
+  }
+
+  return [
+    DEFAULT_ZONE,
+    DEFAULT_SOURCE_COMPONENT,
+    DEFAULT_SOURCE_LOGICAL_COMPONENT,
+    DEFAULT_SERVICE_VARIANT.toString(),
+    DEFAULT_SERVICE_TYPE,
+    value ? 'switchOn' : 'switchOff',
+    ...addressArgs,
+  ];
+}
+
+export function getSceneCmd({ addresses }: SavantEntity) {
   const args = addresses.split(',');
   const addressArgs: string[] = [];
 

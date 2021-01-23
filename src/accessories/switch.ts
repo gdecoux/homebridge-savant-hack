@@ -15,9 +15,9 @@ export class SavantSwitch {
   private service: Service;
 
   constructor(
-    private readonly platform: SavantPlatform,
-    private readonly accessory: PlatformAccessory,
-    private readonly entity: SavantEntity,
+    protected readonly platform: SavantPlatform,
+    protected readonly accessory: PlatformAccessory,
+    protected readonly entity: SavantEntity,
   ) {
     this.service =
       this.accessory.getService(this.platform.Service.Switch) ||
@@ -29,10 +29,10 @@ export class SavantSwitch {
       .on('get', this.getOn.bind(this));
   }
 
-  private setOn(value: CharacteristicValue, callback: CharacteristicSetCallback) {
-    this.platform.logger.info(getSwitchCmd(this.entity).join(' '));
+  protected setOn(value: CharacteristicValue, callback: CharacteristicSetCallback) {
+    this.platform.logger.info(getSwitchCmd(this.entity, value as boolean).join(' '));
 
-    serviceRequest(getSwitchCmd(this.entity), (err) => {
+    serviceRequest(getSwitchCmd(this.entity, value as boolean), (err) => {
       if (err) {
         callback(err);
       } else {
@@ -41,7 +41,7 @@ export class SavantSwitch {
     });
   }
 
-  private getOn(callback: CharacteristicGetCallback) {
+  protected getOn(callback: CharacteristicGetCallback) {
     this.platform.logger.info(this.entity.stateName!);
 
     readState([this.entity.stateName!], (err, result) => {
