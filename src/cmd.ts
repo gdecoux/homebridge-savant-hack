@@ -12,7 +12,7 @@ export function getSwitchCmd({ addresses }: SavantEntity) {
 
   for (let i = 0; i < args.length; i++) {
     addressArgs[i] = 'Address' + (i + 1);
-    addressArgs.push(args[addresses[i]] || '');
+    addressArgs[i + 1] = args[addresses[i]] || '';
   }
 
   return [
@@ -32,7 +32,7 @@ export function getDimmerCmd({ addresses }: SavantEntity, value: number) {
 
   for (let i = 0; i < args.length; i++) {
     addressArgs[i] = 'Address' + (i + 1);
-    addressArgs.push(args[addresses[i]] || '');
+    addressArgs[i + 1] = args[addresses[i]] || '';
   }
 
   return [
