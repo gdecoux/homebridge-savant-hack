@@ -20,7 +20,7 @@ export function getSwitchCmd({ addresses }: SavantEntity, value: boolean) {
     DEFAULT_SOURCE_LOGICAL_COMPONENT,
     DEFAULT_SERVICE_VARIANT.toString(),
     DEFAULT_SERVICE_TYPE,
-    value ? 'switchOn' : 'switchOff',
+    value ? 'SwitchOn' : 'SwitchOff',
     ...addressArgs,
   ];
 }
