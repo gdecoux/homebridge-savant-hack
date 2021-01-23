@@ -30,6 +30,8 @@ export class SavantSwitch {
   }
 
   private setOn(value: CharacteristicValue, callback: CharacteristicSetCallback) {
+    this.platform.logger.info(getSwitchCmd(this.entity).join(' '));
+
     serviceRequest(getSwitchCmd(this.entity), (err) => {
       if (err) {
         callback(err);
@@ -40,6 +42,8 @@ export class SavantSwitch {
   }
 
   private getOn(callback: CharacteristicGetCallback) {
+    this.platform.logger.info(this.entity.stateName!);
+
     readState([this.entity.stateName!], (err, result) => {
       if (err) {
         callback(err);
