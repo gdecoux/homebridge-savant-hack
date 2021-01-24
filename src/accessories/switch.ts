@@ -47,7 +47,18 @@ export class SavantSwitch {
         callback(err);
       } else {
         this.platform.logger.info(this.entity.stateName!, result, result == 0 ? false : true);
-        callback(null, result == 0 ? false : true);
+        const value = Number(result);
+        let bool: boolean;
+        if (value === 0) {
+          bool = false;
+        } else if (value === 1 || value > 0) {
+          bool = true;
+        } else {
+          this.platform.logger.error('INVALID getOn: ', result);
+          bool = false;
+        }
+
+        callback(null, bool);
       }
     });
   }
