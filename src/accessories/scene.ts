@@ -27,6 +27,7 @@ export class SavantScene extends SavantSwitch {
       if (err) {
         callback(err);
       } else {
+        this.platform.logger.info(this.entity.stateName!, result, result == 0 ? false : true);
         callback(null, result == 0 ? false : true);
       }
     });

@@ -42,12 +42,11 @@ export class SavantSwitch {
   }
 
   protected getOn(callback: CharacteristicGetCallback) {
-    this.platform.logger.info(this.entity.stateName!);
-
     readState([this.entity.stateName!], (err, result) => {
       if (err) {
         callback(err);
       } else {
+        this.platform.logger.info(this.entity.stateName!, result, result == 0 ? false : true);
         callback(null, result == 0 ? false : true);
       }
     });
