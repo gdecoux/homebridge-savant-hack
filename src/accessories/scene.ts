@@ -37,6 +37,8 @@ export class SavantScene extends SavantSwitch {
           this.platform.logger.error('INVALID getOn: ', result);
           bool = false;
         }
+
+        callback(null, bool);
       }
     });
   }
