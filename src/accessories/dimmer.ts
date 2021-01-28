@@ -23,8 +23,8 @@ export class SavantDimmer {
       this.accessory.getService(this.platform.Service.Lightbulb) ||
       this.accessory.addService(this.platform.Service.Lightbulb);
 
-    this.service.addCharacteristic(this.platform.Characteristic.Name);
-    this.service.setCharacteristic(this.platform.Characteristic.Name, this.entity.zoneID);
+    this.service.addCharacteristic(this.platform.Characteristic.Version);
+    this.service.setCharacteristic(this.platform.Characteristic.Version, this.entity.zoneID);
 
     this.service
       .getCharacteristic(this.platform.Characteristic.On)
