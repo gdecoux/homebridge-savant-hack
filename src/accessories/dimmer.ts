@@ -23,10 +23,11 @@ export class SavantDimmer {
       this.accessory.getService(this.platform.Service.Lightbulb) ||
       this.accessory.addService(this.platform.Service.Lightbulb);
 
-    this.service.getCharacteristic(this.platform.Characteristic.Manufacturer) ||
-      this.service.addCharacteristic(this.platform.Characteristic.Manufacturer);
+    const test =
+      this.service.getCharacteristic(this.platform.Characteristic.Version) ||
+      this.service.addCharacteristic(this.platform.Characteristic.Version);
 
-    this.service.setCharacteristic(this.platform.Characteristic.Manufacturer, this.entity.zoneID);
+    this.service.setCharacteristic(this.platform.Characteristic.Version, this.entity.zoneID);
 
     this.service
       .getCharacteristic(this.platform.Characteristic.On)
