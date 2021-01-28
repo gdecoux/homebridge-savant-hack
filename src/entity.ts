@@ -4,6 +4,7 @@ export interface SavantEntity {
   name: string;
   addresses: string;
   entityType: 'Dimmer' | 'Scene' | 'Switch';
+  stateName: string;
   pressCommand?: string;
   holdCommand?: string;
   releaseCommand?: string;
@@ -13,7 +14,6 @@ export interface SavantEntity {
   dimmerCommand?: string;
   fadeTime?: string;
   delayTime?: string;
-  stateName?: string;
   lightsArOn?: number;
   roomLightsControl?: string;
   orderValue?: number;

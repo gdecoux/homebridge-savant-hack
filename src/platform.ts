@@ -43,6 +43,20 @@ export class SavantPlatform implements DynamicPlatformPlugin {
       return;
     }
 
+    const cached = [...this.accessories.keys()];
+    const available = this.config.entities.map((entity) =>
+      this.api.hap.uuid.generate(entity.id.toString()),
+    );
+
+    for (const cachedId of cached) {
+      if (!available.includes(cachedId)) {
+        const accessory = this.accessories.get(cachedId)!;
+        this.logger.info('Removing existing accessory from cache:', accessory.displayName);
+        this.api.unregisterPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [accessory]);
+        this.accessories.delete(accessory.UUID);
+      }
+    }
+
     for (const entity of this.config.entities) {
       const uuid = this.api.hap.uuid.generate(entity.id.toString());
       const existingAccessory = this.accessories.get(uuid);
@@ -62,17 +76,17 @@ export class SavantPlatform implements DynamicPlatformPlugin {
 
   private addAccessory(entity: SavantEntity) {
     const uuid = this.api.hap.uuid.generate(entity.id.toString());
-    const accessory = this.accessories.get(uuid);
+    const accessory = this.accessories.get(uuid)!;
 
     switch (entity.entityType) {
       case 'Dimmer':
-        new SavantDimmer(this, accessory!, entity);
+        new SavantDimmer(this, accessory, entity);
         break;
       case 'Scene':
-        new SavantScene(this, accessory!, entity);
+        new SavantScene(this, accessory, entity);
         break;
       case 'Switch':
-        new SavantSwitch(this, accessory!, entity);
+        new SavantSwitch(this, accessory, entity);
         break;
       default:
         break;
