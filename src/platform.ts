@@ -44,7 +44,7 @@ export class SavantPlatform implements DynamicPlatformPlugin {
     }
 
     for (const entity of this.config.entities) {
-      const uuid = this.api.hap.uuid.generate(entity.name);
+      const uuid = this.api.hap.uuid.generate(entity.id.toString());
       const existingAccessory = this.accessories.get(uuid);
 
       if (existingAccessory) {
@@ -61,7 +61,7 @@ export class SavantPlatform implements DynamicPlatformPlugin {
   }
 
   private addAccessory(entity: SavantEntity) {
-    const uuid = this.api.hap.uuid.generate(entity.name);
+    const uuid = this.api.hap.uuid.generate(entity.id.toString());
     const accessory = this.accessories.get(uuid);
 
     switch (entity.entityType) {
