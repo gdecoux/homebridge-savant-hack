@@ -23,6 +23,9 @@ export class SavantSwitch {
       this.accessory.getService(this.platform.Service.Switch) ||
       this.accessory.addService(this.platform.Service.Switch);
 
+    this.service.addCharacteristic(this.platform.Characteristic.Model);
+    this.service.setCharacteristic(this.platform.Characteristic.Model, this.entity.zoneID);
+
     this.service
       .getCharacteristic(this.platform.Characteristic.On)
       .on('set', this.setOn.bind(this))
